@@ -2,6 +2,10 @@ import re
 import json
 import s3fs
 
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
+
 CHUNK_REGEX = re.compile("^[0-9]+([.][0-9]+)*$")
 
 

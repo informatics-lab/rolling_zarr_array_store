@@ -1,0 +1,2 @@
+include versioneer.py
+include rolling_zarr_array_store/_version.py
