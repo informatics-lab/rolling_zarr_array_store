@@ -27,7 +27,7 @@ setup(
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
 
-    description='Array store to support experimental rolling zarr format.',
+    description='Array store implementation to support experimental rolling zarr format.',
     long_description=long_description,
 
     # The project's main homepage.
