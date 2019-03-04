@@ -1,0 +1,1 @@
+requirements = s3fs
