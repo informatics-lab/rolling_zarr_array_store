@@ -4,7 +4,7 @@ import copy
 
 
 def test_init():
-    store = rolling_zarr_array_store.TempChunkTaggingArrayStore('some/path')
+    store = rolling_zarr_array_store.TempChunkTaggingArrayStore('some/path', anon=True)
 
 
 @patch('s3fs.S3FileSystem')
