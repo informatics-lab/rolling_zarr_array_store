@@ -15,13 +15,13 @@ def is_chunk(path):
 
 class OffsetArrayStoreMixin(object):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, cache_offset=True, **kwargs):
         self._offsets = {}
-
+        self.cache_offset = cache_offset
         super().__init__(*args, **kwargs)
 
     def __get_offset(self, prefix):
-        offset = self._offsets.get(prefix, False)
+        offset = self._offsets.get(prefix, False) if self.cache_offset else False
         if offset is False:
             offset = None
             try:
@@ -29,7 +29,6 @@ class OffsetArrayStoreMixin(object):
                 attrs = super().__getitem__(path)
                 offset = json.loads(attrs).get('_offset', None)
             except KeyError:
-                print(f"key error {prefix}")
                 pass
 
             self._offsets[prefix] = offset

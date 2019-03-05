@@ -16,6 +16,31 @@ def test_read_write_no_offset():
         assert store[str(i)] == i
 
 
+def test_cache_offset():
+    store = Store()
+
+    store['0'] = 0
+
+    offset = [1]
+    store['.zattrs'] = json.dumps({'_offset': offset})
+
+    assert store['0'] == 0
+
+
+def test_no_cache_offset():
+    store = Store(cache_offset=False)
+
+    store['0'] = 0
+    store['1'] = 1
+
+    assert store['0'] == 0
+
+    offset = [1]
+    store['.zattrs'] = json.dumps({'_offset': offset})
+
+    assert store['0'] == 1
+
+
 def test_read_write_with_offset():
 
     store = Store()

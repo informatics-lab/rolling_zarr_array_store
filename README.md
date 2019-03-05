@@ -1,4 +1,4 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/informatics-lab/rolling_zarr_array_store/master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/informatics-lab/rolling_zarr_array_store/master?urlpath=lab/tree/binder)
 
 # rolling_zarr_array_store
 
