@@ -1,0 +1,30 @@
+language: generic
+sudo: required
+os:
+- linux
+env:
+  matrix:
+  - CONDA_PY=36
+install:
+- |
+  echo "Installing a fresh version of Miniconda."
+  MINICONDA_URL="https://repo.continuum.io/miniconda"
+  MINICONDA_FILE="Miniconda3-latest-$(case $TRAVIS_OS_NAME in (linux) echo Linux;; (osx) echo MacOSX;;esac)-x86_64.sh"
+  curl -L -O "${MINICONDA_URL}/${MINICONDA_FILE}"
+  bash $MINICONDA_FILE -b
+- |
+  echo "Configuring conda."
+  source $HOME/miniconda3/bin/activate root
+  conda install -y conda-build anaconda-client flake8
+script:
+- |
+  flake8 rolling_zarr_array_store
+  conda build ./conda
+- |
+  if [ -n "$TRAVIS_TAG" ]; then
+      # If tagged git version, upload package to main channel
+      anaconda -t ${ANACONDA_TOKEN} upload -u informaticslab --force `conda build --output ./conda`
+  elif ! [ -n "$TRAVIS_PULL_REQUEST" ]; then
+      # Otherwise upload package to dev channel
+      anaconda -t ${ANACONDA_TOKEN} upload -u informaticslab --label dev --force `conda build --output ./conda`
+  fi

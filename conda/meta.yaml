@@ -1,0 +1,36 @@
+package:
+   name: rolling_zarr_array_store
+   version: {{ GIT_DESCRIBE_TAG }}
+
+source:
+   path: ..
+git:
+  depth: false
+
+build:
+  number: {{ GIT_DESCRIBE_NUMBER }}
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+  noarch: python
+
+requirements:
+  build:
+    - python
+    - jinja2
+  run:
+    - python
+    - s3fs
+
+test:
+  source_files:
+    - tests
+  requires:
+    - pytest
+  commands:
+    - py.test --verbose
+
+about:
+  home: https://github.com/informatics-lab/rolling_zarr_array_store
+  license: BSD
+  license_file: LICENSE
+  summary: |
+    Array store implementation to support experimental rolling zarr format.
