@@ -48,7 +48,7 @@ dependencies:
   - python-dateutil=2.8.0
   - pyyaml=3.13
   - readline=7.0
-  - rolling_zarr_array_store=0.0.3
+  - rolling_zarr_array_store=0.0.5
   - s3fs=0.2.0
   - s3transfer=0.1.13
   - setuptools=40.8.0
