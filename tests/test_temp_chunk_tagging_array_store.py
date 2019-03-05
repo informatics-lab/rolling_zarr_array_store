@@ -18,7 +18,7 @@ def test_temp_path_write(s3fs):
 
     s3fs.return_value.s3_additional_kwargs = s3_args
     s3fs.return_value.open.return_value.__enter__.return_value.write.side_effect = check_args
-    store = rolling_zarr_array_store.TempChunkTaggingArrayStore('some/path', temp_chunk_path=temp_path)
+    store = rolling_zarr_array_store.TempChunkTaggingArrayStore('some/path', temp_chunk_path=temp_path, anon=True)
 
     # shouldn't tag
     expected_s3_args = copy.copy(s3_args)
@@ -43,7 +43,7 @@ def test_no_temp_path_write(s3fs):
 
     s3fs.return_value.s3_additional_kwargs = s3_args
     s3fs.return_value.open.return_value.__enter__.return_value.write.side_effect = check_args
-    store = rolling_zarr_array_store.TempChunkTaggingArrayStore('some/path', temp_chunk_path=temp_path)
+    store = rolling_zarr_array_store.TempChunkTaggingArrayStore('some/path', temp_chunk_path=temp_path, anon=True)
 
     # shouldn't tag
     store['0.4'] = 'thing'
