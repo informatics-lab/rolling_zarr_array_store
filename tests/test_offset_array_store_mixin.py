@@ -7,6 +7,30 @@ class Store(OffsetArrayStoreMixin, dict):
     pass
 
 
+def test_negative_keys():
+    store = Store(cache_offset=False)
+    for i in range(0, 10):
+        store[str(i)] = i
+
+    offset = [5]
+    store['.zattrs'] = json.dumps({'_offset': offset})
+
+    assert store['-5'] == 0
+    assert store['0'] == 5
+    assert store['4'] == 9
+
+    store = Store(cache_offset=False)
+    offset = [-5]
+    store['.zattrs'] = json.dumps({'_offset': offset})
+
+    for i in range(0, 10):
+        store[str(i)] = i
+
+    assert store['0'] == 0
+    assert store['5'] == 5
+    assert store['9'] == 9
+
+
 def test_read_write_no_offset():
     store = Store()
     for i in range(10):
