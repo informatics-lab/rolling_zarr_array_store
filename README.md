@@ -2,6 +2,6 @@
 
 # rolling_zarr_array_store
 
-Array store implementation to support experimental rolling zarr format.
+Array store implementation to support experimental rolling Zarr format.
 
-TODO: Write this :)
+Please see the [accompanying  blog post](https://medium.com/p/a394fa48b671/) and or [binder](https://mybinder.org/v2/gh/informatics-lab/rolling_zarr_array_store/master?urlpath=lab/tree/binder). 
